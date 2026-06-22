@@ -5,8 +5,8 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get(':id')
-  getRating(@Param('id') id: string) {
-    return this.appService.getRating(Number(id));
+  @Get(':imdbId')
+  getRating(@Param('imdbId') imdbId: string) {
+    return this.appService.getRating(imdbId);
   }
 }

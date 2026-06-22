@@ -1,0 +1,13 @@
+{
+  "name": "app-peliculas-soa",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start:movies":   "cd backend/movies-service && npm run start:dev",
+    "start:ratings":  "cd backend/rating-service && npm run start:dev",
+    "start:recs":     "cd backend/recommendation-service && npm run start:dev",
+    "start:gateway":  "cd backend/esb-gateway && npm run start:dev",
+    "start:frontend": "cd frontend && npm run dev",
+    "dev": "start cmd /k \"npm run start:movies\" && start cmd /k \"npm run start:ratings\" && start cmd /k \"npm run start:recs\" && start cmd /k \"npm run start:gateway\" && start cmd /k \"npm run start:frontend\""
+  }
+}
