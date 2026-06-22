@@ -5,6 +5,10 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Get()
+  getMovies() {
+    return this.appService.getMovies();
+  }
   @Get(':id')
   getMovie(@Param('id') id: string) {
     return this.appService.getMovie(Number(id));

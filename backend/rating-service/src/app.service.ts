@@ -1,12 +1,20 @@
-import { Injectable } from '@nestjs/common';
-import { Rating } from 'contracts/rating.interface';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Rating } from './contracts/rating.interface';
+import { RATINGS } from './data/ratings.data';
 
 @Injectable()
 export class AppService {
+  getRatings(): Rating[] {
+    return RATINGS;
+  }
+
   getRating(movieId: number): Rating {
-    return {
-      movieId,
-      rating: 8.7,
-    };
+    const rating = RATINGS.find((rating) => rating.movieId === movieId);
+
+    if (!rating) {
+      throw new NotFoundException(`Rating for movie ${movieId} not found`);
+    }
+
+    return rating;
   }
 }

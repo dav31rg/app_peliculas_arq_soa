@@ -1,0 +1,39 @@
+services:
+
+  movies-service:
+    build:
+      context: ./backend/movies-service
+    ports:
+      - "3001:3001"
+
+  rating-service:
+    build:
+      context: ./backend/rating-service
+    ports:
+      - "3002:3002"
+
+  recommendation-service:
+    build:
+      context: ./backend/recommendation-service
+    ports:
+      - "3003:3003"
+
+  esb-gateway:
+    build:
+      context: ./backend/esb-gateway
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./backend/esb-gateway/.env.docker
+    depends_on:
+      - movies-service
+      - rating-service
+      - recommendation-service
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - esb-gateway
