@@ -1,0 +1,52 @@
+<api context="/api/movies" name="MoviesAPI" xmlns="http://ws.apache.org/ns/synapse">
+  <resource methods="GET" uri-template="/popular">
+    <inSequence>
+      <property name="REST_URL_POSTFIX" scope="axis2" action="remove"/>
+      <call>
+        <endpoint key="PopularServiceEndpoint"/>
+      </call>
+      <respond/>
+    </inSequence>
+    <faultSequence>
+      <makefault response="true" version="pox">
+        <code xmlns:tns="http://www.w3.org/2003/05/soap-envelope" value="tns:Receiver"/>
+        <reason value="Popular service unavailable"/>
+      </makefault>
+      <respond/>
+    </faultSequence>
+  </resource>
+
+  <resource methods="GET" uri-template="/top-rated">
+    <inSequence>
+      <property name="REST_URL_POSTFIX" scope="axis2" action="remove"/>
+      <call>
+        <endpoint key="TopRatedServiceEndpoint"/>
+      </call>
+      <respond/>
+    </inSequence>
+    <faultSequence>
+      <makefault response="true" version="pox">
+        <code xmlns:tns="http://www.w3.org/2003/05/soap-envelope" value="tns:Receiver"/>
+        <reason value="Top rated service unavailable"/>
+      </makefault>
+      <respond/>
+    </faultSequence>
+  </resource>
+
+  <resource methods="GET" uri-template="/now-playing">
+    <inSequence>
+      <property name="REST_URL_POSTFIX" scope="axis2" action="remove"/>
+      <call>
+        <endpoint key="NowPlayingServiceEndpoint"/>
+      </call>
+      <respond/>
+    </inSequence>
+    <faultSequence>
+      <makefault response="true" version="pox">
+        <code xmlns:tns="http://www.w3.org/2003/05/soap-envelope" value="tns:Receiver"/>
+        <reason value="Now playing service unavailable"/>
+      </makefault>
+      <respond/>
+    </faultSequence>
+  </resource>
+</api>

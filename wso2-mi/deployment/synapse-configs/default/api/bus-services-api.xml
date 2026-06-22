@@ -1,0 +1,30 @@
+<api context="/bus" name="BusServicesAPI" xmlns="http://ws.apache.org/ns/synapse">
+  <resource methods="GET" uri-template="/services">
+    <inSequence>
+      <payloadFactory media-type="json">
+        <format>
+          [
+            {
+              "name": "PopularService",
+              "contract": "MovieContract",
+              "endpoint": "http://popular-service:3001/movies/popular"
+            },
+            {
+              "name": "TopRatedService",
+              "contract": "MovieContract",
+              "endpoint": "http://top-rated-service:3002/movies/top-rated"
+            },
+            {
+              "name": "NowPlayingService",
+              "contract": "MovieContract",
+              "endpoint": "http://now-playing-service:3003/movies/now-playing"
+            }
+          ]
+        </format>
+        <args/>
+      </payloadFactory>
+      <property name="messageType" value="application/json" scope="axis2"/>
+      <respond/>
+    </inSequence>
+  </resource>
+</api>

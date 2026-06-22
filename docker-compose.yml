@@ -1,0 +1,90 @@
+services:
+  popular-service:
+    build:
+      context: ./backend/popular-service
+      dockerfile: Dockerfile
+    container_name: popular-service
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - TMDB_API_TOKEN=${TMDB_API_TOKEN}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3001/movies/popular"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  top-rated-service:
+    build:
+      context: ./backend/top-rated-service
+      dockerfile: Dockerfile
+    container_name: top-rated-service
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - TMDB_API_TOKEN=${TMDB_API_TOKEN}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3002/movies/top-rated"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  now-playing-service:
+    build:
+      context: ./backend/now-playing-service
+      dockerfile: Dockerfile
+    container_name: now-playing-service
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - TMDB_API_TOKEN=${TMDB_API_TOKEN}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3003/movies/now-playing"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  wso2-mi:
+    build:
+      context: ./wso2-mi
+      dockerfile: Dockerfile
+    container_name: wso2-mi
+    ports:
+      - "8290:8290"
+      - "8253:8253"
+      - "9164:9164"
+      - "9201:9201"
+    volumes:
+      - ./wso2-mi/deployment/synapse-configs/default:/home/wso2carbon/wso2mi-4.4.0/repository/deployment/server/synapse-configs/default
+    depends_on:
+      popular-service:
+        condition: service_healthy
+      top-rated-service:
+        condition: service_healthy
+      now-playing-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9201/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 120s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      wso2-mi:
+        condition: service_healthy
+    restart: unless-stopped

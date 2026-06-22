@@ -1,0 +1,3 @@
+<endpoint name="NowPlayingServiceEndpoint" xmlns="http://ws.apache.org/ns/synapse">
+  <address uri="http://now-playing-service:3003/movies/now-playing"/>
+</endpoint>

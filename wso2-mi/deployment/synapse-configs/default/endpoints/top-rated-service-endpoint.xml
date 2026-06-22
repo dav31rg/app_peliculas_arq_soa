@@ -1,0 +1,3 @@
+<endpoint name="TopRatedServiceEndpoint" xmlns="http://ws.apache.org/ns/synapse">
+  <address uri="http://top-rated-service:3002/movies/top-rated"/>
+</endpoint>

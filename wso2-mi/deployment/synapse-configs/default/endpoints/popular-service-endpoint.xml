@@ -1,0 +1,3 @@
+<endpoint name="PopularServiceEndpoint" xmlns="http://ws.apache.org/ns/synapse">
+  <address uri="http://popular-service:3001/movies/popular"/>
+</endpoint>
