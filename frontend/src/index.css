@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #040714;
+  color: #f9f9f9;
+  font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Scrollbar custom */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track { background: #040714; }
+::-webkit-scrollbar-thumb { background: #0063e5; border-radius: 2px; }
+
+/* Carousel scroll */
+.carousel-scroll {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.carousel-scroll::-webkit-scrollbar { display: none; }
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #0e1329 25%, #1a2140 50%, #0e1329 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; background: #0e1329; }
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
