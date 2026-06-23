@@ -483,17 +483,6 @@ Archivo encargado de coordinar el despliegue de todos los contenedores y estable
 
 ---
 
-## 📸 Capturas
-
-Agregar aquí las capturas de:
-
-* Catálogo de películas.
-* Detalle de película.
-* Swagger de los servicios.
-* Ejecución mediante Docker Compose.
-
----
-
 ## 👨‍💻 Autor
 
 Proyecto desarrollado como práctica académica para el curso de Arquitectura de Software utilizando el estilo arquitectónico SOA (Service-Oriented Architecture).
