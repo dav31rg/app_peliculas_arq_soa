@@ -4,9 +4,9 @@
 
 | Nombre |
 |---|
-| _Integrante 1_ |
-| _Integrante 2_ |
-| _Integrante 3_ |
+| Davel Reymundo Gobea |
+| Humberto Alejandro Lizana Ventura |
+| Dante Tarraga Usca |
 
 
 ---
